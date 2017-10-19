@@ -16,6 +16,11 @@ defmodule P9iWeb.Endpoint do
     at: "/js/vendor", from: "deps/phoenix_html/priv/static", gzip: false,
     only: ~w(phoenix_html.js)
 
+  # Load JavaScript library from "node_modules" directory.
+  plug Plug.Static,
+    at: "/js/vendor", from: "node_modules", gzip: false,
+    only: ~w()
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
