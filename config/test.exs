@@ -13,7 +13,7 @@ config :logger, level: :warn
 config :p9i, P9i.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "postgres",
+  password: System.get_env("TRAVIS_POSTGRESQL_PASSWORD") || "postgres",
   database: "p9i_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
