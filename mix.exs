@@ -5,12 +5,15 @@ defmodule P9i.Mixfile do
     [
       app: :p9i,
       version: "0.0.1",
-      elixir: "~> 1.4",
+      elixir: "~> 1.5",
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      dialyzer: dialyzer(),
+      description: description(),
+      package: package()
     ]
   end
 
@@ -40,7 +43,10 @@ defmodule P9i.Mixfile do
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:ex_doc, "~> 0.18", only: :dev, runtime: false},
+      {:credo, "~> 0.8", only: :dev, runtime: false},
+      {:dialyxir, "~> 0.5", only: :dev, runtime: false}
     ]
   end
 
@@ -55,6 +61,24 @@ defmodule P9i.Mixfile do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       "test": ["ecto.create --quiet", "ecto.migrate", "test"]
+    ]
+  end
+
+  defp dialyzer do
+    [
+      plt_add_deps: :transitive
+    ]
+  end
+
+  defp description do
+    "TODO: Add description"
+  end
+
+  defp package do
+    [
+      maintainers: ["niku"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/niku/p9i"}
     ]
   end
 end
